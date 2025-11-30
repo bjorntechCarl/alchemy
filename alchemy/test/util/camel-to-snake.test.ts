@@ -120,6 +120,11 @@ describe("camelToSnakeObjectDeep", () => {
       expect(result).toEqual(["a", "b", "c"]);
     });
 
+    it("handles object with arrays of strings", () => {
+      const result = camelToSnakeObjectDeep({ someArray: ["a", "b", "c"] });
+      expect(result).toEqual({ some_array: ["a", "b", "c"] });
+    });
+
     it("handles array of objects", () => {
       const result = camelToSnakeObjectDeep([
         { firstName: "John" },
