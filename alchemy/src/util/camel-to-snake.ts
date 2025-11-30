@@ -8,17 +8,21 @@ export function camelToSnakeObjectDeep<T>(
   if (obj === undefined || obj === null) {
     return obj as any;
   }
-  
+
   // If it's not an object (primitive types), return as-is
   if (typeof obj !== "object") {
     return obj as any;
   }
-  
+
+  if (obj instanceof RegExp) {
+    return obj as any;
+  }
+
   // Handle arrays
   if (Array.isArray(obj)) {
     return obj.map(camelToSnakeObjectDeep) as any;
   }
-  
+
   // Handle objects
   return Object.fromEntries(
     Object.entries(obj).map(([key, value]) => [
